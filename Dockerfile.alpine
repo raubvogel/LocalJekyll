@@ -1,0 +1,52 @@
+############################################################
+# Dockerfile to build a test jeckyl instance 
+# Based on ALpine
+# https://github.com/envygeeks/jekyll-docker/blob/master/repos/jekyll/Dockerfile
+############################################################
+
+# Set the base image to Ubuntu
+FROM alpine
+
+# File Author / Maintainer
+MAINTAINER Mauricio Tavares "raubvogel@gmail.com"
+
+################## BEGIN INSTALLATION ######################
+# We are following
+# RUN apk update && apk -y upgrade 
+RUN apk --no-cache add \
+  zlib-dev \
+  libffi-dev \
+  build-base \
+  libxml2-dev \
+  imagemagick-dev \
+  readline-dev \
+  libxslt-dev \
+  yaml-dev \
+  cmake \
+  ruby \
+  ruby-dev \
+  libffi-dev
+
+##################### INSTALLATION END #####################
+
+# Create user
+RUN adduser --system mshide
+# RUN groupadd -r mshide && useradd -r -g mshide mshide
+
+USER mshide
+
+# Install jeckyll
+RUN fgrep mshide /etc/passwd
+RUN echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc && \
+    echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc && \
+    echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc 
+# RUN . ~/.bashrc && \
+#     gem install jekyll bundler
+
+
+# The rest will be configured in the entrypoint script
+# EXPOSE 22
+
+# Start service
+# CMD ["/usr/sbin/sshd", "-D"]
+

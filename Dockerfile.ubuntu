@@ -1,0 +1,58 @@
+############################################################
+# Dockerfile to build a jekyll development instance 
+# 
+# 
+############################################################
+
+# Set the base image to Ubuntu
+FROM ubuntu:latest
+
+# File Author / Maintainer.
+# MAINTAINER is deprecated 
+LABEL org.opencontainers.image.authors="raubvogel@gmail.com"
+
+################## BEGIN INSTALLATION ######################
+
+ENV DEVUSER mrhide
+ENV DEVID 1995 
+ENV EXTGID 1999
+
+# Install all the packages we need
+RUN apt-get update && apt-get -y upgrade 
+RUN apt-get install -y ruby-dev zlib1g-dev python3 make
+RUN apt-get install -y \
+  libxml2-dev \
+  libxslt-dev \
+  python3-pip \
+  vim git
+
+# This one is optional; I like to have it around to do quick testing.
+# Comment it out if you do not feel the need for it
+RUN apt-get install -y lynx
+
+##################### INSTALLATION END #####################
+
+# Create user
+RUN useradd -m --shell /bin/bash -u $DEVID $DEVUSER 
+
+USER $DEVUSER
+ENV WD /home/${DEVUSER}
+WORKDIR ${WD}
+
+# Install jekyll
+# RUN fgrep $DEVUSER /etc/passwd
+RUN pip install cffi
+RUN echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc && \
+    echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc && \
+    echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc 
+ENV GEM_HOME="${WD}/gems"
+ENV PATH="${WD}/gems/bin:${PATH}"
+RUN gem install jekyll bundler
+
+USER root
+
+# Put the entrypoint script somewhere we can find
+COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod 0700 /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
