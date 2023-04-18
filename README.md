@@ -130,7 +130,7 @@ local drive and then passed to docker. Ignore it.
 mrhide@6aaefdf74d14:~$ mkdir site/docs
 mrhide@6aaefdf74d14:~$ ls -l site/
 total 8
-drwxrwxr-x 6 nobody 4294967294 4096 Feb 24 15:50 docs
+drwxrwxr-x 6 nobody 4294967294 4096 Mar 12 01:50 docs
 mrhide@6aaefdf74d14:~$ 
 ```
 
@@ -156,12 +156,13 @@ terminal session/tmux tab,
 
 ``` bash
 user@lappy:~$ ls -l /path/to/my/repo/docs/noo 
--rw-rw-r-- 1 nobody 4294967294 0 Mar 11 22:32 /path/to/my/repo/docs/noo
+-rw-rw-r-- 1 nobody 4294967294 0 Mar 12 03:32 /path/to/my/repo/docs/noo
 user@lappy:~$ rm /path/to/my/repo/docs/noo 
 user@lappy:~$ 
 ```
 
-8. Now we are ready to test it by building the default test website using the minima jekyll template.
+8. Now we are ready to test it by building the default test website using the 
+[minima](https://github.com/jekyll/minima) jekyll template.
 I will not show the output of each step but something like this would get it
 working (I like to use `bundle update` instead of `bundle install`).
 So, get inside the `docs` directory and
