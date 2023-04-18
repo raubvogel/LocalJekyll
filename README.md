@@ -7,7 +7,8 @@ Docker container for developing Jekyll-based websites
 [docker](https://www.docker.com/)/[podman](https://podman.io/) container
 in a production kind of fashion, this may not be the repo for you.
 Instead, this is less about running Jekyll and more about building and 
-quickly testing a jekyll-based website. Once you are satisfied with your
+quickly testing a jekyll-based website; take a look at the
+[About](#about) session below. Once you are satisfied with your
 deed, put it in the production site, or build such a site using something like
 [jekyll-docker](https://github.com/envygeeks/jekyll-docker)
 instead.
@@ -110,7 +111,7 @@ user@lappy:~$
 ```
 
 3. Now start the container. Note we are exposing port `4000` as we mentioned 
-earlier on. 
+earlier on in the [assumptions](#assumptions) session. 
 
 ``` bash
 user@lappy:~$ docker run -i --rm -p 4000:4000 \
