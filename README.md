@@ -12,6 +12,8 @@ deed, put it in the production site, or build such a site using something like
 [jekyll-docker](https://github.com/envygeeks/jekyll-docker)
 instead.
 
+2. I need to come up with another warning...
+
 ## About
 I do tend to use docker a lot to spool up a dev environment that does not
 affect my computer. That means that I am not running docker as it is 
@@ -162,6 +164,7 @@ user@lappy:~$
 8. Now we are ready to test it by building the default test website using the minima jekyll template.
 I will not show the output of each step but something like this would get it
 working (I like to use `bundle update` instead of `bundle install`).
+So, get inside the `docs` directory and
 
 ``` bash
 jekyll new --skip-bundle .
